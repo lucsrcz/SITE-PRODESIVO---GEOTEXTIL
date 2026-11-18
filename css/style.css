@@ -1248,3 +1248,16 @@ dialog.pg-modal::backdrop { background: rgba(9, 28, 46, .68); backdrop-filter: b
 }
 /* Hero: sem grade de linhas retas (horizontais/verticais) */
 .hero::before { content: none; background: none; }
+/* ===== Hero: ondas 3D em WebGL no lugar das linhas (degradê hero + 2ª seção preservado) ===== */
+.hero-waves { position: absolute; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; pointer-events: none; }
+.hero.has-waves .hero-contours { display: none; }
+.hero.has-waves ~ .numbers::after { display: none; }
+/* ===== Hero: topografia 3D (WebGL2) no lugar das curvas; degradê hero + 2ª seção preservado ===== */
+.hero-topo { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 62%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 62%, transparent 100%); }
+.hero-topo-canvas { display: block; width: 100%; height: 100%; }
+.hero.has-topo .hero-contours { display: none; }
+.hero.has-topo ~ .numbers::after { display: none; }
+/* Véu do hero mais leve quando a topografia está ativa (efeito visível no centro e à esquerda, texto ainda legível) */
+.hero.has-topo::after { background: linear-gradient(90deg, rgba(13,46,73,.80) 0%, rgba(13,46,73,.55) 34%, rgba(13,46,73,.12) 56%, rgba(13,46,73,0) 70%); }
