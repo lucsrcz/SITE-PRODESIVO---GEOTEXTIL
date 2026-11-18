@@ -178,7 +178,7 @@
       var waMsg = encodeURIComponent('Olá, Prodesivo! Vi o catálogo de produtos e gostaria de solicitar um orçamento para: ' + p.nome + '.');
       return '<article class="cat-product-card" id="' + p.id + '">' +
         '<div class="cat-product-media">' +
-          '<img src="' + p.img + '" alt="' + p.nome + '" width="800" height="450" loading="lazy" decoding="async">' +
+          '<img src="' + p.img + '" alt="' + p.nome + '" width="800" height="500" loading="lazy" decoding="async">' +
           '<span class="cat-product-cat">' + p.categoria + '</span>' +
         '</div>' +
         '<div class="cat-product-body">' +

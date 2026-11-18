@@ -241,15 +241,18 @@
 }
 .cat-product-media {
   position: relative;
-  aspect-ratio: 16 / 9;
-  background: #DCE7F0;
+  aspect-ratio: 16 / 10;
+  background: #fff;
   overflow: hidden;
+  border-bottom: 1px solid #EEF2F6;
 }
 .cat-product-media img {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  padding: 6px;
+  background: #fff;
   transition: transform .45s ease;
 }
 .cat-product-card:hover .cat-product-media img {
