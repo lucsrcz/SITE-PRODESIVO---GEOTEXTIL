@@ -943,3 +943,46 @@ dialog.pg-modal::backdrop { background: rgba(11,60,122,.45); }
 .sol-body::after { background: linear-gradient(105deg, transparent, rgba(255,255,255,.9), transparent); }
 .sol-card h3 { color: #0D2E49; text-shadow: 0 1px 0 rgba(255,255,255,.9); }
 .sol-card p { color: #435668; text-shadow: 0 1px 0 rgba(255,255,255,.7); }
+/* ===== Soluções por segmento: foto de obra com véu azulado (mesmo estilo do Processo de atendimento) ===== */
+#solucoes { isolation: isolate; background: #0D2E49; }
+#solucoes::before { content: ""; position: absolute; inset: 0; z-index: -2; pointer-events: none;
+  background: url("../assets/img/bg/solucoes-obra.jpg") center / cover no-repeat; filter: saturate(.55) contrast(1.05); opacity: .5; }
+#solucoes::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(13,46,73,.9) 0%, rgba(13,46,73,.62) 45%, rgba(13,46,73,.86) 100%),
+    linear-gradient(90deg, rgba(0,118,168,.35), rgba(13,46,73,.15) 50%, rgba(0,118,168,.35)); }
+#solucoes .wrap { position: relative; }
+#solucoes .section-head h2, #solucoes .section-head p, #solucoes .sol-list h3 { text-shadow: 0 1px 8px rgba(8,28,46,.7); }
+/* ===== Card "Cobertura nacional": efeito metalizado (azul-gelo/prata, convexo) ===== */
+.map-panel { position: relative; overflow: hidden; border: 1px solid #9fb6c8;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 0%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 72%),
+    radial-gradient(ellipse 80% 60% at 50% 120%, rgba(90,125,155,.45) 0%, rgba(90,125,155,0) 70%),
+    radial-gradient(ellipse 35% 90% at 0% 50%, rgba(120,150,175,.28) 0%, rgba(120,150,175,0) 100%),
+    radial-gradient(ellipse 35% 90% at 100% 50%, rgba(120,150,175,.28) 0%, rgba(120,150,175,0) 100%),
+    linear-gradient(180deg, #f6fafd 0%, #e3eef7 40%, #cddfec 75%, #b9d0e2 100%);
+  box-shadow: inset 0 8px 14px rgba(255,255,255,.9), inset 0 -12px 18px rgba(70,105,135,.28), inset 0 1px 0 #fff, 0 14px 32px rgba(13,46,73,.18); }
+.map-panel::after { content: ""; position: absolute; top: 0; left: -70%; width: 40%; height: 100%; pointer-events: none;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,.75), transparent); transform: skewX(-18deg); transition: left .9s ease; }
+.map-panel:hover::after { left: 130%; }
+.map-panel > * { position: relative; z-index: 1; }
+.map-panel h3 { color: #0D2E49; text-shadow: 0 1px 0 rgba(255,255,255,.9); }
+.map-panel p, .map-stats div { color: #3d5266; text-shadow: 0 1px 0 rgba(255,255,255,.7); }
+.map-stats strong { color: #0D2E49; }
+@media (prefers-reduced-motion: reduce) { .map-panel::after { display: none; } }
+/* ===== Card "Cobertura nacional": azul metalizado (igual à faixa de números) + texto legível ===== */
+.map-panel { border: 1px solid #00415c;
+  background:
+    radial-gradient(ellipse 60% 70% at 50% 0%, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 70%),
+    radial-gradient(ellipse 70% 60% at 50% 115%, rgba(0,35,55,.55) 0%, rgba(0,35,55,0) 70%),
+    radial-gradient(ellipse 35% 90% at 0% 50%, rgba(0,40,60,.45) 0%, rgba(0,40,60,0) 100%),
+    radial-gradient(ellipse 35% 90% at 100% 50%, rgba(0,40,60,.45) 0%, rgba(0,40,60,0) 100%),
+    linear-gradient(180deg, #38a9db 0%, #0a8cc2 35%, #0076A8 60%, #00668f 100%);
+  box-shadow: inset 0 10px 18px rgba(255,255,255,.35), inset 0 -14px 22px rgba(0,40,60,.4), inset 0 1px 0 rgba(255,255,255,.8), 0 16px 40px rgba(0,60,90,.38); }
+.map-panel::after { background: linear-gradient(105deg, transparent, rgba(255,255,255,.35), transparent); }
+.map-panel img { filter: drop-shadow(0 10px 18px rgba(0,30,50,.45)); }
+.map-panel h3 { color: #fff; font-size: 1.4rem; font-weight: 800; letter-spacing: -.01em; text-shadow: 0 -1px 0 rgba(0,0,0,.4), 0 2px 8px rgba(0,35,55,.5); }
+.map-panel p { color: #fff; font-size: 1.02rem; line-height: 1.5; font-weight: 500; text-shadow: 0 1px 2px rgba(0,35,55,.55); }
+.map-stats { gap: 36px; margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.28); }
+.map-stats div { color: #fff; font-size: .92rem; font-weight: 600; text-shadow: 0 1px 2px rgba(0,35,55,.55); }
+.map-stats strong { color: #fff; font-size: 2rem; font-weight: 800; line-height: 1.1; text-shadow: 0 -1px 0 rgba(0,0,0,.4), 0 2px 6px rgba(0,35,55,.45); }
