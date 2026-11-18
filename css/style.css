@@ -1246,3 +1246,5 @@ dialog.pg-modal::backdrop { background: rgba(9, 28, 46, .68); backdrop-filter: b
   dialog.pg-modal[open] { animation: none; }
   .product-card, .product-media img, .modal-cta { transition: none; }
 }
+/* Hero: sem grade de linhas retas (horizontais/verticais) */
+.hero::before { content: none; background: none; }
