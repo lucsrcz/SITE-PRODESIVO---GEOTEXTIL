@@ -107,19 +107,19 @@
     // Segments
     (function () {
       var SOL_IMGS = {
-        1: "assets/img/solucoes/solucao-1.webp",
-        2: "assets/img/solucoes/solucao-2.webp",
-        3: "assets/img/solucoes/solucao-3.webp",
-        4: "assets/img/solucoes/solucao-4.webp",
-        5: "assets/img/solucoes/solucao-5.webp",
-        6: "assets/img/solucoes/solucao-6.webp",
-        7: "assets/img/solucoes/solucao-7.webp",
-        8: "assets/img/solucoes/solucao-8.webp"
+        1: "assets/img/solucoes/solucao-1.jpg",
+        2: "assets/img/solucoes/solucao-2.jpg",
+        3: "assets/img/solucoes/solucao-3.jpg",
+        4: "assets/img/solucoes/solucao-4.jpg",
+        5: "assets/img/solucoes/solucao-5.jpg",
+        6: "assets/img/solucoes/solucao-6.jpg",
+        7: "assets/img/solucoes/solucao-7.jpg",
+        8: "assets/img/solucoes/solucao-8.jpg"
       };
       var SOL_ALTS = {"1": "Equipe instalando geotêxtil para estabilidade de solo", "2": "Geotêxtil envolvendo dreno em valeta ao lado de rodovia", "3": "Mantas verdes de controle de erosão aplicadas em talude", "4": "Reforço de solo com geogrelha em obra de contenção", "5": "Geomembrana PEAD instalada para impermeabilização", "6": "Geocélula PEAD instalada em talude para contenção e estabilização", "7": "Muro de gabiões em obra de contenção", "8": "Geogrelha aplicada na repavimentação de rodovia"};
       function card(s, copy) {
         var n = SOLUTIONS.indexOf(s) + 1;
-        return '<article class="sol-card"><div class="sol-media"><img src="' + SOL_IMGS[n] + '" alt="' + (copy ? '' : SOL_ALTS[n]) + '" width="560" height="320" loading="lazy" decoding="async" draggable="false"></div>' +
+        return '<article class="sol-card"><div class="sol-media"><img src="' + SOL_IMGS[n] + '" alt="' + (copy ? '' : SOL_ALTS[n]) + '" width="840" height="480" loading="lazy" decoding="async" draggable="false"></div>' +
           '<div class="sol-body"><h3>' + s.nome + '</h3><p>' + s.desc + '</p></div></article>';
       }
       function row(items, dir, label) {
@@ -134,15 +134,46 @@
         SEGMENTS.map(function (s) { return '<span class="tag" title="' + s.desc + '">' + s.nome + '</span>'; }).join('') + '</div></div>';
     })();
 
-    // Differentials
-    document.getElementById('diffGrid').innerHTML = DIFFS.map(function (d) {
-      return '<article class="diff-card reveal"><div class="seg-icon">' + svg(d.icon) + '</div><h3>' + d.nome + '</h3><p>' + d.desc + '</p></article>';
-    }).join('');
+    // Differentials (cards estáticos no HTML)
 
-    // Form selects
-    fill(document.getElementById('f-uf'), UFS.map(function (u) { return { v: u, t: u + ' — ' + UF_NAMES[u] }; }), 'Selecione o estado');
-    fill(document.getElementById('f-produto'), PRODUCTS.map(function (p) { return { v: p.id, t: p.nome }; }), 'Selecione o produto');
-    fill(document.getElementById('f-segmento'), SEGMENTS.map(function (s) { return { v: s.nome, t: s.nome }; }), 'Selecione o segmento');
+    // Form selects (se existirem na página)
+    var fUf = document.getElementById('f-uf');
+    if (fUf) {
+      fill(fUf, UFS.map(function (u) { return { v: u, t: u + ' — ' + UF_NAMES[u] }; }), 'Selecione o estado');
+      fill(document.getElementById('f-produto'), PRODUCTS.map(function (p) { return { v: p.id, t: p.nome }; }), 'Selecione o produto');
+      fill(document.getElementById('f-segmento'), SEGMENTS.map(function (s) { return { v: s.nome, t: s.nome }; }), 'Selecione o segmento');
+    }
+
+    // Floating catalog popover (clique/toque e links #contato)
+    var catFloat = document.getElementById('catFloat');
+    var catBtn = document.getElementById('catFloatBtn');
+    if (catFloat && catBtn) {
+      catBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = catFloat.classList.toggle('is-open');
+        catBtn.setAttribute('aria-expanded', String(open));
+      });
+      document.addEventListener('click', function (e) {
+        if (!catFloat.contains(e.target)) {
+          catFloat.classList.remove('is-open');
+          catBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          catFloat.classList.remove('is-open');
+          catBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+      document.querySelectorAll('a[data-open-quote]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          catFloat.classList.add('is-open');
+          catBtn.setAttribute('aria-expanded', 'true');
+        });
+      });
+    }
 
     // Reveal on scroll
     var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (entries) {
@@ -182,48 +213,50 @@
       });
     });
 
-    // Form validation
+    // Form validation (se existir na página)
     var form = document.getElementById('quoteForm');
     var successBox = document.getElementById('successBox');
     var EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var ok = true, first = null;
+    if (form) {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var ok = true, first = null;
+        form.querySelectorAll('[required]').forEach(function (el) {
+          var wrap = el.closest('[data-field]');
+          var msg = '';
+          var v = el.value.trim();
+          if (!v) msg = 'Campo obrigatório.';
+          else if (el.type === 'email' && !EMAIL.test(v)) msg = 'Informe um e-mail válido.';
+          else if (el.type === 'tel' && v.replace(/\D/g, '').length < 10) msg = 'Informe um telefone com DDD.';
+          wrap.classList.toggle('invalid', !!msg);
+          wrap.querySelector('.err').textContent = msg;
+          if (msg) { ok = false; if (!first) first = el; }
+        });
+        successBox.classList.remove('show');
+        if (!ok) {
+          first.focus();
+          if (window.skipUI && skipUI.toast) skipUI.toast('Revise os campos destacados.', { type: 'error' });
+          return;
+        }
+        var pick = function (n) { var el = form.elements[n]; return el ? (el.tagName === 'SELECT' ? (el.options[el.selectedIndex] || {}).text : el.value).trim() : ''; };
+        var lines = ['Olá, Prodesivo! Gostaria de solicitar um orçamento.', '',
+          'Nome: ' + pick('nome'), 'Empresa: ' + pick('empresa'), 'E-mail: ' + pick('email'), 'Telefone: ' + pick('telefone'),
+          'Estado: ' + pick('uf'), 'Produto: ' + pick('produto'), 'Segmento: ' + pick('segmento'), 'Área/quantidade: ' + pick('area')];
+        if (pick('mensagem')) lines.push('Mensagem: ' + pick('mensagem'));
+        var waUrl = 'https://wa.me/5561984311510?text=' + encodeURIComponent(lines.join('\n'));
+        var waLink = document.getElementById('waRetry'); if (waLink) waLink.href = waUrl;
+        window.open(waUrl, '_blank', 'noopener');
+        successBox.classList.add('show');
+        form.reset();
+        if (window.skipUI && skipUI.toast) skipUI.toast('Abrindo o WhatsApp…', { type: 'success' });
+      });
       form.querySelectorAll('[required]').forEach(function (el) {
-        var wrap = el.closest('[data-field]');
-        var msg = '';
-        var v = el.value.trim();
-        if (!v) msg = 'Campo obrigatório.';
-        else if (el.type === 'email' && !EMAIL.test(v)) msg = 'Informe um e-mail válido.';
-        else if (el.type === 'tel' && v.replace(/\D/g, '').length < 10) msg = 'Informe um telefone com DDD.';
-        wrap.classList.toggle('invalid', !!msg);
-        wrap.querySelector('.err').textContent = msg;
-        if (msg) { ok = false; if (!first) first = el; }
+        el.addEventListener('input', function () {
+          var wrap = el.closest('[data-field]');
+          wrap.classList.remove('invalid');
+          wrap.querySelector('.err').textContent = '';
+        });
       });
-      successBox.classList.remove('show');
-      if (!ok) {
-        first.focus();
-        if (window.skipUI && skipUI.toast) skipUI.toast('Revise os campos destacados.', { type: 'error' });
-        return;
-      }
-      var pick = function (n) { var el = form.elements[n]; return el ? (el.tagName === 'SELECT' ? (el.options[el.selectedIndex] || {}).text : el.value).trim() : ''; };
-      var lines = ['Olá, Prodesivo! Gostaria de solicitar um orçamento.', '',
-        'Nome: ' + pick('nome'), 'Empresa: ' + pick('empresa'), 'E-mail: ' + pick('email'), 'Telefone: ' + pick('telefone'),
-        'Estado: ' + pick('uf'), 'Produto: ' + pick('produto'), 'Segmento: ' + pick('segmento'), 'Área/quantidade: ' + pick('area')];
-      if (pick('mensagem')) lines.push('Mensagem: ' + pick('mensagem'));
-      var waUrl = 'https://wa.me/5561984311510?text=' + encodeURIComponent(lines.join('\n'));
-      var waLink = document.getElementById('waRetry'); if (waLink) waLink.href = waUrl;
-      window.open(waUrl, '_blank', 'noopener');
-      successBox.classList.add('show');
-      form.reset();
-      if (window.skipUI && skipUI.toast) skipUI.toast('Abrindo o WhatsApp…', { type: 'success' });
-    });
-    form.querySelectorAll('[required]').forEach(function (el) {
-      el.addEventListener('input', function () {
-        var wrap = el.closest('[data-field]');
-        wrap.classList.remove('invalid');
-        wrap.querySelector('.err').textContent = '';
-      });
-    });
+    }
   });
 })();
