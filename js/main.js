@@ -297,15 +297,16 @@
     }
 
     grid.innerHTML = PRODUCTS.map(function (p, idx) {
-      return '<article class="product-card reveal" data-idx="' + idx + '" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Ver detalhes de ' + p.nome + '">' +
+      return '<article class="product-card reveal" itemscope itemtype="https://schema.org/Product" data-idx="' + idx + '" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Ver detalhes e especificações de ' + p.nome + '">' +
+        '<meta itemprop="brand" content="Prodesivo">' +
         '<div class="product-media">' +
-          '<img src="' + p.img + '" alt="' + p.nome + ' — ' + p.categoria + '" width="800" height="500" loading="lazy" decoding="async">' +
-          '<span class="product-cat">' + p.categoria + '</span>' +
+          '<img itemprop="image" src="' + p.img + '" alt="' + p.nome + ' — ' + p.categoria + ' | Prodesivo Geossintéticos" width="800" height="500" loading="lazy" decoding="async">' +
+          '<span class="product-cat" itemprop="category">' + p.categoria + '</span>' +
         '</div>' +
         '<div class="product-body">' +
-          '<h3>' + p.nome + '</h3>' +
+          '<h3 itemprop="name">' + p.nome + '</h3>' +
           '<p class="product-spec">' + p.spec + '</p>' +
-          '<p class="product-desc">' + p.desc + '</p>' +
+          '<p class="product-desc" itemprop="description">' + p.desc + '</p>' +
           '<span class="product-link">Ver detalhes e aplicações →</span>' +
         '</div></article>';
     }).join('');
