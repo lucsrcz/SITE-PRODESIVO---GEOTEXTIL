@@ -27,7 +27,7 @@
   });
 
   document.addEventListener('click', function (e) {
-    if (root.classList.contains('is-open') && !root.contains(e.target)) setOpen(false);
+    if (root.classList.contains('is-open') && !card.contains(e.target)) setOpen(false);
   });
 
   if (reduce || !fine) return;

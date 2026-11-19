@@ -268,25 +268,47 @@
     function openProductModal(idx) {
       var p = PRODUCTS[idx];
       if (!p || !modal) return;
-      document.getElementById('modalCat').textContent = p.categoria;
-      document.getElementById('modalTitle').textContent = p.nome;
-      document.getElementById('modalSpec').textContent = p.spec;
-      var ondeTags = p.onde.map(function (o) { return '<span class="modal-app-tag">' + o + '</span>'; }).join('');
-      var benItems = p.beneficios.map(function (b) {
-        return '<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg><span>' + b + '</span></li>';
-      }).join('');
+      var resumo = p.detalhe + ' ' + p.como + ' Principais aplicações: ' + p.onde.join(', ').toLowerCase() + '.';
       document.getElementById('modalBody').innerHTML =
         '<div class="modal-showcase">' +
-          '<div class="modal-media"><img src="' + p.img + '" alt="' + p.nome + '" width="800" height="500" decoding="async"></div>' +
-          '<div class="modal-overview">' +
-            '<div class="modal-section"><span class="modal-label">Sobre o produto</span><p>' + p.detalhe + '</p></div>' +
-            '<div class="modal-section"><span class="modal-label">Como é aplicado</span><p>' + p.como + '</p></div>' +
+          '<div class="modal-media" role="button" tabindex="0" aria-label="Ampliar imagem de ' + p.nome + '" title="Clique para dar zoom">' +
+            '<img src="' + p.img + '" alt="' + p.nome + '" width="800" height="500" decoding="async">' +
           '</div>' +
-        '</div>' +
-        '<div class="modal-panels">' +
-          '<div class="modal-panel"><span class="modal-label">Onde é aplicado</span><div class="modal-app-tags">' + ondeTags + '</div></div>' +
-          '<div class="modal-panel"><span class="modal-label">Principais benefícios</span><ul class="modal-benefits">' + benItems + '</ul></div>' +
+          '<div class="modal-overview">' +
+            '<div class="modal-overview-head">' +
+              '<div class="modal-overview-titles">' +
+                '<span class="modal-cat-pill" id="modalCat">' + p.categoria + '</span>' +
+                '<h3 class="modal-title-right" id="modalTitle">' + p.nome + '</h3>' +
+                '<p class="modal-spec-right" id="modalSpec">' + p.spec + '</p>' +
+              '</div>' +
+              '<img class="modal-brand-symbol" src="assets/img/favicon.png" alt="Prodesivo" width="44" height="44" decoding="async">' +
+            '</div>' +
+            '<p class="modal-summary">' + resumo + '</p>' +
+          '</div>' +
         '</div>';
+
+      var mediaBox = document.querySelector('#modalBody .modal-media');
+      var mediaImg = mediaBox ? mediaBox.querySelector('img') : null;
+      if (mediaBox && mediaImg) {
+        function toggleZoom(e) {
+          var on = mediaBox.classList.toggle('is-zoomed');
+          if (on && e && e.clientX) {
+            var r = mediaBox.getBoundingClientRect();
+            mediaImg.style.transformOrigin = (((e.clientX - r.left) / r.width) * 100).toFixed(1) + '% ' + (((e.clientY - r.top) / r.height) * 100).toFixed(1) + '%';
+          } else if (!on) {
+            mediaImg.style.transformOrigin = 'center center';
+          }
+        }
+        mediaBox.addEventListener('click', toggleZoom);
+        mediaBox.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleZoom(); }
+        });
+        mediaBox.addEventListener('pointermove', function (e) {
+          if (!mediaBox.classList.contains('is-zoomed')) return;
+          var r = mediaBox.getBoundingClientRect();
+          mediaImg.style.transformOrigin = (((e.clientX - r.left) / r.width) * 100).toFixed(1) + '% ' + (((e.clientY - r.top) / r.height) * 100).toFixed(1) + '%';
+        });
+      }
 
       var subj = encodeURIComponent('Orçamento — ' + p.nome + ' | Prodesivo');
       var bodyMail = encodeURIComponent('Olá, equipe Prodesivo!\n\nVi o produto "' + p.nome + '" no site e gostaria de solicitar um orçamento e especificação técnica.\n\nNome: \nEmpresa: \nTelefone: \nEstado/Cidade: \nÁrea ou quantidade estimada: ');
@@ -307,7 +329,7 @@
           '<h3 itemprop="name">' + p.nome + '</h3>' +
           '<p class="product-spec">' + p.spec + '</p>' +
           '<p class="product-desc" itemprop="description">' + p.desc + '</p>' +
-          '<span class="product-link">Ver detalhes e aplicações →</span>' +
+          '<span class="product-link">Detalhes</span>' +
         '</div></article>';
     }).join('');
 
