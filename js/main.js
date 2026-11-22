@@ -289,6 +289,10 @@
       var msgWa = encodeURIComponent('Olá, Prodesivo! Vi o produto "' + p.nome + '" no site e gostaria de solicitar um orçamento.');
       document.getElementById('modalGmail').href = 'mailto:leimar.leitao@prodesivo.com.br?subject=' + subj + '&body=' + bodyMail;
       document.getElementById('modalWa').href = 'https://wa.me/5561984311510?text=' + msgWa;
+      var modalQuoteBtn = document.getElementById('modalQuoteBtn');
+      if (modalQuoteBtn) {
+        modalQuoteBtn.setAttribute('data-prod', p.nome);
+      }
       modal.showModal();
     }
 
@@ -473,6 +477,15 @@
       quoteModal.addEventListener('click', function (e) {
         if (e.target === quoteModal) quoteModal.close();
       });
+      var modalQuoteBtnEl = document.getElementById('modalQuoteBtn');
+      if (modalQuoteBtnEl) {
+        modalQuoteBtnEl.addEventListener('click', function () {
+          var prodName = modalQuoteBtnEl.getAttribute('data-prod');
+          if (modal && modal.open) modal.close();
+          if (qProd && prodName) qProd.value = prodName;
+          quoteModal.showModal();
+        });
+      }
     }
 
     // Reveal on scroll
@@ -609,7 +622,8 @@
           '<h4>5. Seus direitos como titular (Art. 18 da LGPD)</h4>' +
           '<p>Você pode solicitar a qualquer momento a confirmação da existência de tratamento, o acesso, a correção, a anonimização, a portabilidade, a eliminação de dados desnecessários ou a revogação do consentimento.</p>' +
           '<h4>6. Canal do Encarregado (DPO)</h4>' +
-          '<p>Para exercer seus direitos ou tirar dúvidas sobre privacidade, entre em contato pelo e-mail <a href="mailto:leimar.leitao@prodesivo.com.br">leimar.leitao@prodesivo.com.br</a> ou telefone <a href="tel:+556133560060">(61) 3356-0060</a>.</p>'
+          '<p>Para exercer seus direitos ou tirar dúvidas sobre privacidade, entre em contato pelo e-mail <a href="mailto:leimar.leitao@prodesivo.com.br">leimar.leitao@prodesivo.com.br</a> ou telefone <a href="tel:+556133560060">(61) 3356-0060</a>.</p>' +
+          '<p><button type="button" class="legal-cookie-trigger" data-open-cookie-prefs>Alterar preferências de cookies</button></p>'
       },
       cookies: {
         title: 'Política de Cookies',
@@ -648,6 +662,17 @@
       if (!doc || !legalModal) return;
       legalTitle.textContent = doc.title;
       legalBody.innerHTML = doc.html;
+      var prefTrigger = legalBody.querySelector('[data-open-cookie-prefs]');
+      if (prefTrigger && cookieBanner) {
+        prefTrigger.addEventListener('click', function () {
+          legalModal.close();
+          cookieBanner.hidden = false;
+          if (cookiePrefsPanel) {
+            cookiePrefsPanel.hidden = false;
+            cookieAccept.textContent = 'Salvar preferências';
+          }
+        });
+      }
       legalModal.showModal();
     }
     document.querySelectorAll('[data-legal]').forEach(function (el) {

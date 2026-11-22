@@ -38,6 +38,8 @@
 
   car.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') rows.forEach(function (r) { r.hover = true; }); });
   car.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') rows.forEach(function (r) { r.hover = false; }); });
+  car.addEventListener('focusin', function () { rows.forEach(function (r) { r.hover = true; }); });
+  car.addEventListener('focusout', function (e) { if (!car.contains(e.relatedTarget)) rows.forEach(function (r) { r.hover = false; }); });
 
   var visible = true;
   if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { visible = es[0].isIntersecting; }, { threshold: 0, rootMargin: '250px 0px' }).observe(car);
