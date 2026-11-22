@@ -8,13 +8,11 @@
   var car = document.getElementById('solCarousel');
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var SPEED = 38; // px por segundo
-  var paused = false; // pausa/retoma somente ao clicar
   var rows = [].slice.call(car.querySelectorAll('.sol-row')).map(function (row) {
     var track = row.querySelector('.sol-track');
     return { row: row, track: track, dir: parseFloat(row.getAttribute('data-dir')) || -1, x: 0, L: 1, vel: 0, drag: false, hover: false, lastX: 0, lastT: 0, resumeAt: 0 };
   });
   function measure() { rows.forEach(function (r) { r.L = r.track.scrollWidth / 3 || 1; if (r.dir > 0 && r.x === 0) r.x = -r.L; }); }
-  function wrap(r) { while (r.x <= -2 * r.L) r.x += r.L; while (r.x > -r.L * 0 && r.x > -1) r.x -= r.L; if (r.x > 0) r.x -= r.L; }
   function norm(r) { var m = r.x % r.L; r.x = m - r.L; }
   function paint(r) { r.track.style.transform = 'translate3d(' + r.x.toFixed(2) + 'px,0,0)'; }
   measure(); rows.forEach(function (r) { if (r.dir < 0) r.x = -r.L * 0.0 - 1; norm(r); paint(r); });
@@ -33,7 +31,7 @@
       var now = performance.now(), dx = e.clientX - r.lastX, dt = Math.max(now - r.lastT, 1);
       r.moved += Math.abs(dx); r.x += dx; r.vel = dx / dt * 1000; r.lastX = e.clientX; r.lastT = now; norm(r); paint(r);
     });
-    function end(e) { if (!r.drag) return; r.drag = false; if (e.type === 'pointerup' && r.moved < 6) { paused = !paused; car.classList.toggle('is-paused', paused); } row.classList.remove('dragging'); r.resumeAt = performance.now() + 900; try { row.releasePointerCapture(e.pointerId); } catch (_) {} }
+    function end(e) { if (!r.drag) return; r.drag = false; row.classList.remove('dragging'); r.resumeAt = performance.now() + 900; try { row.releasePointerCapture(e.pointerId); } catch (_) {} }
     row.addEventListener('pointerup', end); row.addEventListener('pointercancel', end);
     row.addEventListener('dragstart', function (e) { e.preventDefault(); });
   });
@@ -50,7 +48,7 @@
       if (r.drag) return;
       if (Math.abs(r.vel) > 5) { r.x += r.vel * dt; r.vel *= Math.pow(.04, dt); norm(r); paint(r); return; }
       r.vel = 0;
-      if (reduce || paused || t < r.resumeAt) return;
+      if (reduce || r.hover || t < r.resumeAt) return;
       r.x += r.dir * SPEED * dt; norm(r); paint(r);
     });
     requestAnimationFrame(tick);

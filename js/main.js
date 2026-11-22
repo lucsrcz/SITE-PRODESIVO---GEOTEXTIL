@@ -1,33 +1,4 @@
 (function () {
-  var ICONS = {
-    layers: '<path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/><path d="M3 17l9 5 9-5"/>',
-    wall: '<rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 9h18M3 14h18M9 4v5M15 4v5M6 9v5M12 9v5M18 9v5M9 14v6M15 14v6"/>',
-    drain: '<path d="M4 6h16M4 10h16M4 14h16"/><circle cx="8" cy="18" r="2"/><circle cx="16" cy="18" r="2"/>',
-    pipe: '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/>',
-    culvert: '<path d="M3 18a9 9 0 0 1 18 0"/><path d="M3 18h18"/><path d="M7 18a5 5 0 0 1 10 0"/>',
-    leaf: '<path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14z"/><path d="M5 19l7-7"/>',
-    fabric: '<path d="M3 6h18M3 12h18M3 18h18"/><path d="M6 3v18M12 3v18M18 3v18" stroke-dasharray="2 3"/>',
-    tank: '<ellipse cx="12" cy="6" rx="7" ry="2.5"/><path d="M5 6v12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5V6"/>',
-    mesh: '<path d="M3 3h18v18H3z"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/>',
-    cell: '<path d="M12 2l8.7 5v10L12 22l-8.7-5V7L12 2z"/><path d="M12 2v20M3.3 7L12 12l8.7-5"/>',
-    cable: '<path d="M4 12h16"/><path d="M4 8c2 0 2 2 4 2s2-2 4-2 2 2 4 2 2-2 4-2"/><path d="M4 16c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2"/>',
-    felt: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 9h10M7 13h10"/>',
-    farm: '<path d="M3 20h18"/><path d="M5 20V10l7-5 7 5v10"/><path d="M9 20v-6h6v6"/>',
-    water: '<path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/>',
-    reinforce: '<path d="M3 18l6-6 4 4 8-8"/><path d="M14 8h7v7"/>',
-    road: '<path d="M5 21L9 3M19 21L15 3"/><path d="M12 5v2M12 11v3M12 18v2"/>',
-    shield: '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/>',
-    mine: '<path d="M3 20l6-9 4 5 3-4 5 8H3z"/>',
-    build: '<rect x="4" y="9" width="16" height="12"/><path d="M8 9V4h8v5M9 13h2M13 13h2M9 17h2M13 17h2"/>',
-    check: '<circle cx="12" cy="12" r="9"/>',
-    team: '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.3-5.5 6.5-5.5s5.7 2 6.5 5.5"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.5c2.6.2 4.5 1.8 5 4.5"/>',
-    truck: '<path d="M2 6h12v10H2zM14 10h4l3 3v3h-7"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>',
-    tool: '<path d="M14.7 6.3a4 4 0 0 0 5 5L12 19l-3-3 7.7-7.7z"/><path d="M4 20l2-2"/>'
-  };
-  function svg(name) {
-    return '<svg viewBox="0 0 24 24" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">' + (ICONS[name] || ICONS.layers) + '</svg>';
-  }
-
   var PRODUCTS = [
     {
       id: 'geotextil-nao-tecido',
@@ -245,15 +216,8 @@
     { nome: 'Construção civil', desc: 'Drenagem e contenção em empreendimentos.' }
   ];
 
-  var DIFFS = [
-    { nome: 'Consultoria Técnica', icon: 'tool', desc: 'Serviço prestado pela Prodesivo para que os clientes realizem suas obras de forma assertiva, utilizando os recursos ideais para cada solução, com profissionais capacitados e em constante atualização.' },
-    { nome: 'Portfólio completo', icon: 'layers', desc: '15 linhas de produtos para atender do dreno à impermeabilização, em um único fornecedor.' },
-    { nome: 'Logística nacional', icon: 'truck', desc: 'Entrega em todo o Brasil, com programação de carregamentos por obra e por etapa.' },
-    { nome: 'Assistência técnica em campo', icon: 'team', desc: 'Acompanhamento de instalação e solda, com orientação da equipe técnica no local.' }
-  ];
-
-  var UFS = ['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO'];
-  var UF_NAMES = {AC:'Acre',AL:'Alagoas',AP:'Amapá',AM:'Amazonas',BA:'Bahia',CE:'Ceará',DF:'Distrito Federal',ES:'Espírito Santo',GO:'Goiás',MA:'Maranhão',MT:'Mato Grosso',MS:'Mato Grosso do Sul',MG:'Minas Gerais',PA:'Pará',PB:'Paraíba',PR:'Paraná',PE:'Pernambuco',PI:'Piauí',RJ:'Rio de Janeiro',RN:'Rio Grande do Norte',RS:'Rio Grande do Sul',RO:'Rondônia',RR:'Roraima',SC:'Santa Catarina',SP:'São Paulo',SE:'Sergipe',TO:'Tocantins'};
+  var UFS = ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'];
+  var UF_NAMES = { AC: 'Acre', AL: 'Alagoas', AP: 'Amapá', AM: 'Amazonas', BA: 'Bahia', CE: 'Ceará', DF: 'Distrito Federal', ES: 'Espírito Santo', GO: 'Goiás', MA: 'Maranhão', MT: 'Mato Grosso', MS: 'Mato Grosso do Sul', MG: 'Minas Gerais', PA: 'Pará', PB: 'Paraíba', PR: 'Paraná', PE: 'Pernambuco', PI: 'Piauí', RJ: 'Rio de Janeiro', RN: 'Rio Grande do Norte', RS: 'Rio Grande do Sul', RO: 'Rondônia', RR: 'Roraima', SC: 'Santa Catarina', SP: 'São Paulo', SE: 'Sergipe', TO: 'Tocantins' };
 
   function fill(sel, items, placeholder) {
     var html = '<option value="">' + placeholder + '</option>';
@@ -264,27 +228,37 @@
   document.addEventListener('DOMContentLoaded', function () {
     // Products
     var grid = document.getElementById('productsGrid');
+    var filtersWrap = document.getElementById('productFilters');
     var modal = document.getElementById('productModal');
+
     function openProductModal(idx) {
       var p = PRODUCTS[idx];
       if (!p || !modal) return;
-      var resumo = p.detalhe + ' ' + p.como + ' Principais aplicações: ' + p.onde.join(', ').toLowerCase() + '.';
+      var ondeHtml = (p.onde || []).map(function (item) {
+        return '<span class="modal-chip">' + item + '</span>';
+      }).join('');
+      var benHtml = (p.beneficios || []).map(function (item) {
+        return '<li>' + item + '</li>';
+      }).join('');
+
       document.getElementById('modalBody').innerHTML =
         '<div class="modal-showcase">' +
-          '<div class="modal-media" role="button" tabindex="0" aria-label="Ampliar imagem de ' + p.nome + '" title="Clique para dar zoom">' +
-            '<img src="' + p.img + '" alt="' + p.nome + '" width="800" height="500" decoding="async">' +
-          '</div>' +
-          '<div class="modal-overview">' +
-            '<div class="modal-overview-head">' +
-              '<div class="modal-overview-titles">' +
-                '<span class="modal-cat-pill" id="modalCat">' + p.categoria + '</span>' +
-                '<h3 class="modal-title-right" id="modalTitle">' + p.nome + '</h3>' +
-                '<p class="modal-spec-right" id="modalSpec">' + p.spec + '</p>' +
-              '</div>' +
-              '<img class="modal-brand-symbol" src="assets/img/favicon.png" alt="Prodesivo" width="44" height="44" decoding="async">' +
-            '</div>' +
-            '<p class="modal-summary">' + resumo + '</p>' +
-          '</div>' +
+        '<div class="modal-media" role="button" tabindex="0" aria-label="Ampliar imagem de ' + p.nome + '" title="Clique para dar zoom">' +
+        '<img src="' + p.img + '" alt="' + p.nome + '" width="800" height="500" decoding="async">' +
+        '</div>' +
+        '<div class="modal-overview">' +
+        '<div class="modal-overview-head">' +
+        '<div class="modal-overview-titles">' +
+        '<span class="modal-cat-pill" id="modalCat">' + p.categoria + '</span>' +
+        '<h3 class="modal-title-right" id="modalTitle">' + p.nome + '</h3>' +
+        '<p class="modal-spec-right" id="modalSpec">' + p.spec + '</p>' +
+        '</div>' +
+        '<img class="modal-brand-symbol" src="assets/img/favicon.png" alt="Prodesivo" width="44" height="44" decoding="async">' +
+        '</div>' +
+        '<p class="modal-summary">' + p.detalhe + ' ' + p.como + '</p>' +
+        (benHtml ? '<div class="modal-block"><span class="modal-block-lbl">Diferenciais técnicos</span><ul class="modal-ben-list">' + benHtml + '</ul></div>' : '') +
+        (ondeHtml ? '<div class="modal-block"><span class="modal-block-lbl">Principais aplicações</span><div class="modal-chip-row">' + ondeHtml + '</div></div>' : '') +
+        '</div>' +
         '</div>';
 
       var mediaBox = document.querySelector('#modalBody .modal-media');
@@ -313,39 +287,73 @@
       var subj = encodeURIComponent('Orçamento — ' + p.nome + ' | Prodesivo');
       var bodyMail = encodeURIComponent('Olá, equipe Prodesivo!\n\nVi o produto "' + p.nome + '" no site e gostaria de solicitar um orçamento e especificação técnica.\n\nNome: \nEmpresa: \nTelefone: \nEstado/Cidade: \nÁrea ou quantidade estimada: ');
       var msgWa = encodeURIComponent('Olá, Prodesivo! Vi o produto "' + p.nome + '" no site e gostaria de solicitar um orçamento.');
-      document.getElementById('modalGmail').href = 'https://mail.google.com/mail/?view=cm&fs=1&to=leimar.leitao@prodesivo.com.br&su=' + subj + '&body=' + bodyMail;
+      document.getElementById('modalGmail').href = 'mailto:leimar.leitao@prodesivo.com.br?subject=' + subj + '&body=' + bodyMail;
       document.getElementById('modalWa').href = 'https://wa.me/5561984311510?text=' + msgWa;
       modal.showModal();
     }
 
-    grid.innerHTML = PRODUCTS.map(function (p, idx) {
-      return '<article class="product-card reveal" itemscope itemtype="https://schema.org/Product" data-idx="' + idx + '" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Ver detalhes e especificações de ' + p.nome + '">' +
-        '<meta itemprop="brand" content="Prodesivo">' +
-        '<div class="product-media">' +
+    function renderProducts(cat) {
+      var items = PRODUCTS.map(function (p, idx) { return { p: p, idx: idx }; })
+        .filter(function (entry) { return cat === 'Todos' || entry.p.categoria === cat; });
+
+      grid.innerHTML = items.map(function (entry) {
+        var p = entry.p;
+        var idx = entry.idx;
+        return '<article class="product-card reveal in" itemscope itemtype="https://schema.org/Product" data-idx="' + idx + '" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Ver detalhes e especificações de ' + p.nome + '">' +
+          '<meta itemprop="brand" content="Prodesivo">' +
+          '<div class="product-media">' +
           '<img itemprop="image" src="' + p.img + '" alt="' + p.nome + ' — ' + p.categoria + ' | Prodesivo Geossintéticos" width="800" height="500" loading="lazy" decoding="async">' +
           '<span class="product-cat" itemprop="category">' + p.categoria + '</span>' +
-        '</div>' +
-        '<div class="product-body">' +
+          '</div>' +
+          '<div class="product-body">' +
           '<h3 itemprop="name">' + p.nome + '</h3>' +
           '<p class="product-spec">' + p.spec + '</p>' +
           '<p class="product-desc" itemprop="description">' + p.desc + '</p>' +
           '<span class="product-link">Detalhes</span>' +
-        '</div></article>';
-    }).join('');
+          '</div></article>';
+      }).join('');
 
-    grid.querySelectorAll('.product-card').forEach(function (card) {
-      card.addEventListener('click', function () {
-        openProductModal(+card.getAttribute('data-idx'));
-      });
-      card.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
+      grid.querySelectorAll('.product-card').forEach(function (card) {
+        card.addEventListener('click', function () {
           openProductModal(+card.getAttribute('data-idx'));
-        }
+        });
+        card.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openProductModal(+card.getAttribute('data-idx'));
+          }
+        });
       });
-    });
+    }
+
+    if (filtersWrap) {
+      var cats = ['Todos'];
+      PRODUCTS.forEach(function (p) {
+        if (cats.indexOf(p.categoria) === -1) cats.push(p.categoria);
+      });
+      filtersWrap.innerHTML = cats.map(function (cat) {
+        return '<button type="button" class="filter-pill' + (cat === 'Todos' ? ' is-active' : '') + '" data-cat="' + cat + '" aria-pressed="' + (cat === 'Todos' ? 'true' : 'false') + '">' +
+          cat + '</button>';
+      }).join('');
+      filtersWrap.addEventListener('click', function (e) {
+        var btn = e.target.closest('.filter-pill');
+        if (!btn) return;
+        var cat = btn.getAttribute('data-cat');
+        filtersWrap.querySelectorAll('.filter-pill').forEach(function (b) {
+          var active = b === btn;
+          b.classList.toggle('is-active', active);
+          b.setAttribute('aria-pressed', String(active));
+        });
+        renderProducts(cat);
+      });
+    }
+
+    renderProducts('Todos');
 
     if (modal) {
+      modal.querySelectorAll('[data-dialog-close]').forEach(function (btn) {
+        btn.addEventListener('click', function () { modal.close(); });
+      });
       modal.addEventListener('click', function (e) {
         if (e.target === modal) modal.close();
       });
@@ -363,7 +371,7 @@
         7: "assets/img/solucoes/solucao-7.jpg",
         8: "assets/img/solucoes/solucao-8.jpg"
       };
-      var SOL_ALTS = {"1": "Equipe instalando geotêxtil para estabilidade de solo", "2": "Geotêxtil envolvendo dreno em valeta ao lado de rodovia", "3": "Mantas verdes de controle de erosão aplicadas em talude", "4": "Reforço de solo com geogrelha em obra de contenção", "5": "Geomembrana PEAD instalada para impermeabilização", "6": "Geocélula PEAD instalada em talude para contenção e estabilização", "7": "Muro de gabiões em obra de contenção", "8": "Geogrelha aplicada na repavimentação de rodovia"};
+      var SOL_ALTS = { "1": "Equipe instalando geotêxtil para estabilidade de solo", "2": "Geotêxtil envolvendo dreno em valeta ao lado de rodovia", "3": "Mantas verdes de controle de erosão aplicadas em talude", "4": "Reforço de solo com geogrelha em obra de contenção", "5": "Geomembrana PEAD instalada para impermeabilização", "6": "Geocélula PEAD instalada em talude para contenção e estabilização", "7": "Muro de gabiões em obra de contenção", "8": "Geogrelha aplicada na repavimentação de rodovia" };
       function card(s, copy) {
         var n = SOLUTIONS.indexOf(s) + 1;
         return '<article class="sol-card"><div class="sol-media"><img src="' + SOL_IMGS[n] + '" alt="' + (copy ? '' : SOL_ALTS[n]) + '" width="840" height="480" loading="lazy" decoding="async" draggable="false"></div>' +
@@ -381,17 +389,40 @@
         SEGMENTS.map(function (s) { return '<span class="tag" title="' + s.desc + '">' + s.nome + '</span>'; }).join('') + '</div></div>';
     })();
 
-    // Differentials (cards estáticos no HTML)
+    // Differentials (acordeão compacto no mobile, expandido no desktop)
+    document.querySelectorAll('#diffGrid .diff-card').forEach(function (card) {
+      var title = card.querySelector('h3');
+      if (!title) return;
+      var chev = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      chev.setAttribute('class', 'diff-chevron');
+      chev.setAttribute('viewBox', '0 0 24 24');
+      chev.setAttribute('fill', 'none');
+      chev.setAttribute('stroke', 'currentColor');
+      chev.setAttribute('stroke-width', '2.2');
+      chev.setAttribute('stroke-linecap', 'round');
+      chev.setAttribute('stroke-linejoin', 'round');
+      chev.setAttribute('aria-hidden', 'true');
+      chev.innerHTML = '<path d="m6 9 6 6 6-6"/>';
+      title.appendChild(chev);
 
-    // Form selects (se existirem na página)
-    var fUf = document.getElementById('f-uf');
-    if (fUf) {
-      fill(fUf, UFS.map(function (u) { return { v: u, t: u + ' — ' + UF_NAMES[u] }; }), 'Selecione o estado');
-      fill(document.getElementById('f-produto'), PRODUCTS.map(function (p) { return { v: p.id, t: p.nome }; }), 'Selecione o produto');
-      fill(document.getElementById('f-segmento'), SEGMENTS.map(function (s) { return { v: s.nome, t: s.nome }; }), 'Selecione o segmento');
+      card.addEventListener('click', function () {
+        if (window.innerWidth > 640) return;
+        card.classList.toggle('is-open');
+      });
+    });
+
+    // Quote modal & structured B2B RFQ form
+    var quoteModal = document.getElementById('quoteModal');
+    var qUf = document.getElementById('q-uf');
+    var qProd = document.getElementById('q-produto');
+    if (qUf) {
+      fill(qUf, UFS.map(function (u) { return { v: u, t: u + ' — ' + UF_NAMES[u] }; }), 'Selecione o estado');
+    }
+    if (qProd) {
+      fill(qProd, PRODUCTS.map(function (p) { return { v: p.nome, t: p.nome }; }).concat([{ v: 'Outros', t: 'Outros' }]), 'Selecione o produto');
     }
 
-    // Floating catalog popover (clique/toque e links #contato)
+    // Floating catalog popover
     var catFloat = document.getElementById('catFloat');
     var catBtn = document.getElementById('catFloatBtn');
     if (catFloat && catBtn) {
@@ -412,13 +443,35 @@
           catBtn.setAttribute('aria-expanded', 'false');
         }
       });
-      document.querySelectorAll('a[data-open-quote]').forEach(function (a) {
+      document.querySelectorAll('.main-nav a[href="#contato"]').forEach(function (a) {
         a.addEventListener('click', function (e) {
           e.preventDefault();
           e.stopPropagation();
           catFloat.classList.add('is-open');
           catBtn.setAttribute('aria-expanded', 'true');
         });
+      });
+    }
+
+    document.querySelectorAll('a[data-open-quote]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (quoteModal) {
+          quoteModal.showModal();
+        } else if (catFloat && catBtn) {
+          catFloat.classList.add('is-open');
+          catBtn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    if (quoteModal) {
+      quoteModal.querySelectorAll('[data-quote-close]').forEach(function (btn) {
+        btn.addEventListener('click', function () { quoteModal.close(); });
+      });
+      quoteModal.addEventListener('click', function (e) {
+        if (e.target === quoteModal) quoteModal.close();
       });
     }
 
@@ -435,7 +488,7 @@
     onScroll();
 
     var links = document.querySelectorAll('.main-nav a');
-    var sections = ['inicio','produtos','solucoes','diferenciais','empresa','contato'].map(function (id) { return document.getElementById(id); });
+    var sections = ['inicio', 'produtos', 'solucoes', 'diferenciais', 'empresa', 'contato'].map(function (id) { return document.getElementById(id); });
     var navObs = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (e.isIntersecting) {
@@ -460,49 +513,203 @@
       });
     });
 
-    // Form validation (se existir na página)
+    // Form validation (#quoteForm no #quoteModal)
     var form = document.getElementById('quoteForm');
-    var successBox = document.getElementById('successBox');
-    var EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    var feedback = document.getElementById('quoteFeedback');
+    var emailBtn = document.getElementById('quoteEmailBtn');
+    var copyEmailBtn = document.getElementById('quoteCopyEmail');
     if (form) {
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
+      function validateQuoteForm() {
         var ok = true, first = null;
         form.querySelectorAll('[required]').forEach(function (el) {
           var wrap = el.closest('[data-field]');
           var msg = '';
           var v = el.value.trim();
           if (!v) msg = 'Campo obrigatório.';
-          else if (el.type === 'email' && !EMAIL.test(v)) msg = 'Informe um e-mail válido.';
           else if (el.type === 'tel' && v.replace(/\D/g, '').length < 10) msg = 'Informe um telefone com DDD.';
           wrap.classList.toggle('invalid', !!msg);
           wrap.querySelector('.err').textContent = msg;
           if (msg) { ok = false; if (!first) first = el; }
         });
-        successBox.classList.remove('show');
-        if (!ok) {
-          first.focus();
-          if (window.skipUI && skipUI.toast) skipUI.toast('Revise os campos destacados.', { type: 'error' });
-          return;
-        }
+        if (!ok && first) first.focus();
+        return ok;
+      }
+      function buildQuoteLines() {
         var pick = function (n) { var el = form.elements[n]; return el ? (el.tagName === 'SELECT' ? (el.options[el.selectedIndex] || {}).text : el.value).trim() : ''; };
         var lines = ['Olá, Prodesivo! Gostaria de solicitar um orçamento.', '',
-          'Nome: ' + pick('nome'), 'Empresa: ' + pick('empresa'), 'E-mail: ' + pick('email'), 'Telefone: ' + pick('telefone'),
-          'Estado: ' + pick('uf'), 'Produto: ' + pick('produto'), 'Segmento: ' + pick('segmento'), 'Área/quantidade: ' + pick('area')];
-        if (pick('mensagem')) lines.push('Mensagem: ' + pick('mensagem'));
-        var waUrl = 'https://wa.me/5561984311510?text=' + encodeURIComponent(lines.join('\n'));
-        var waLink = document.getElementById('waRetry'); if (waLink) waLink.href = waUrl;
+          'Nome: ' + pick('nome'),
+          'Empresa: ' + (pick('empresa') || 'Não informada'),
+          'Telefone: ' + pick('telefone'),
+          'Estado: ' + (pick('uf') || 'Não informado'),
+          'Produto: ' + (pick('produto') || 'A definir'),
+          'Área/quantidade: ' + (pick('area') || 'Não informada')];
+        if (pick('mensagem')) lines.push('Observações: ' + pick('mensagem'));
+        return lines.join('\n');
+      }
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!validateQuoteForm()) return;
+        var waUrl = 'https://wa.me/5561984311510?text=' + encodeURIComponent(buildQuoteLines());
         window.open(waUrl, '_blank', 'noopener');
-        successBox.classList.add('show');
-        form.reset();
-        if (window.skipUI && skipUI.toast) skipUI.toast('Abrindo o WhatsApp…', { type: 'success' });
+        if (feedback) feedback.textContent = 'Abrindo o WhatsApp com os dados da sua obra.';
       });
+      if (emailBtn) {
+        emailBtn.addEventListener('click', function () {
+          if (!validateQuoteForm()) return;
+          var subj = encodeURIComponent('Solicitação de Orçamento — Prodesivo');
+          var body = encodeURIComponent(buildQuoteLines());
+          window.location.href = 'mailto:leimar.leitao@prodesivo.com.br?subject=' + subj + '&body=' + body;
+          if (feedback) feedback.textContent = 'Abrindo seu aplicativo de e-mail padrão.';
+        });
+      }
+      if (copyEmailBtn) {
+        copyEmailBtn.addEventListener('click', function () {
+          var email = copyEmailBtn.getAttribute('data-email');
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(email).then(function () {
+              if (feedback) feedback.textContent = 'E-mail copiado: ' + email;
+            });
+          } else if (feedback) {
+            feedback.textContent = 'E-mail: ' + email;
+          }
+        });
+      }
       form.querySelectorAll('[required]').forEach(function (el) {
         el.addEventListener('input', function () {
           var wrap = el.closest('[data-field]');
           wrap.classList.remove('invalid');
           wrap.querySelector('.err').textContent = '';
         });
+      });
+    }
+
+    // Políticas de Privacidade (LGPD / Meta), Cookies e Termos de Uso
+    var LEGAL_DOCS = {
+      privacidade: {
+        title: 'Política de Privacidade',
+        html:
+          '<p><strong>Última atualização:</strong> Novembro de 2026</p>' +
+          '<p>A <strong>Prodesivo Indústria e Comércio Ltda</strong> (CSG 08, Lote 09, Taguatinga Sul, Brasília — DF, CEP 72035-508) valoriza a privacidade e a proteção dos dados pessoais de seus visitantes, clientes e parceiros, em conformidade com a Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018) e com os requisitos de plataformas de comunicação e anúncios como a Meta.</p>' +
+          '<h4>1. Dados que coletamos</h4>' +
+          '<ul>' +
+            '<li><strong>Dados fornecidos por você:</strong> nome completo, empresa/construtora, telefone/WhatsApp, estado (UF), produto de interesse, área/quantidade estimada e observações técnicas enviadas nos canais de orçamento ou contato.</li>' +
+            '<li><strong>Dados de navegação e dispositivos:</strong> endereço IP, tipo de navegador, páginas acessadas, origem do tráfego e eventos de interação (como cliques em botões de orçamento ou WhatsApp), coletados apenas conforme suas preferências de cookies.</li>' +
+          '</ul>' +
+          '<h4>2. Finalidade e base legal do tratamento</h4>' +
+          '<ul>' +
+            '<li><strong>Atendimento comercial e especificação técnica:</strong> elaborar orçamentos, dimensionar geossintéticos e responder solicitações (execução de procedimentos preliminares de contrato — Art. 7º, V, LGPD).</li>' +
+            '<li><strong>Comunicação direta:</strong> contato via WhatsApp, telefone ou e-mail corporativo mediante sua solicitação.</li>' +
+            '<li><strong>Mensuração e anúncios (Meta / Analytics):</strong> avaliar o desempenho de campanhas e otimizar a entrega de anúncios na plataforma Meta, exclusivamente mediante o seu consentimento no aviso de cookies (Art. 7º, I, LGPD).</li>' +
+            '<li><strong>Segurança e obrigações legais:</strong> prevenção a fraudes e cumprimento de obrigações fiscais ou regulatórias.</li>' +
+          '</ul>' +
+          '<h4>3. Compartilhamento com terceiros</h4>' +
+          '<p>Não vendemos seus dados pessoais. O compartilhamento ocorre apenas com ferramentas estritamente necessárias à operação e ao atendimento solicitado por você (como WhatsApp, provedor de e-mail, Google Maps para localização e, quando autorizado, plataformas de mensuração como Meta Platforms Inc.).</p>' +
+          '<h4>4. Retenção e segurança</h4>' +
+          '<p>Mantemos os dados pelo tempo necessário para cumprir as finalidades informadas ou prazos legais aplicáveis, adotando boas práticas técnicas e administrativas contra acessos não autorizados.</p>' +
+          '<h4>5. Seus direitos como titular (Art. 18 da LGPD)</h4>' +
+          '<p>Você pode solicitar a qualquer momento a confirmação da existência de tratamento, o acesso, a correção, a anonimização, a portabilidade, a eliminação de dados desnecessários ou a revogação do consentimento.</p>' +
+          '<h4>6. Canal do Encarregado (DPO)</h4>' +
+          '<p>Para exercer seus direitos ou tirar dúvidas sobre privacidade, entre em contato pelo e-mail <a href="mailto:leimar.leitao@prodesivo.com.br">leimar.leitao@prodesivo.com.br</a> ou telefone <a href="tel:+556133560060">(61) 3356-0060</a>.</p>'
+      },
+      cookies: {
+        title: 'Política de Cookies',
+        html:
+          '<p><strong>Última atualização:</strong> Novembro de 2026</p>' +
+          '<p>Esta Política explica como a <strong>Prodesivo Indústria e Comércio Ltda</strong> utiliza cookies e tecnologias semelhantes ao visitar nosso site.</p>' +
+          '<h4>1. O que são cookies?</h4>' +
+          '<p>Cookies são pequenos arquivos armazenados no seu navegador que ajudam o site a funcionar corretamente, lembrar suas preferências e, quando autorizado, medir a audiência e a eficácia de campanhas.</p>' +
+          '<h4>2. Categorias utilizadas</h4>' +
+          '<ul>' +
+            '<li><strong>Cookies estritamente necessários:</strong> indispensáveis para o funcionamento básico da navegação e para registrar sua escolha de consentimento no navegador (<code>prodesivo_cookie_consent</code>). Não podem ser desativados nos sistemas essenciais.</li>' +
+            '<li><strong>Cookies de análise e desempenho:</strong> ajudam a entender quais páginas e produtos são mais consultados para melhorar a usabilidade do site.</li>' +
+            '<li><strong>Cookies de publicidade e mensuração (Meta):</strong> podem ser usados para mensurar conversões de anúncios da Meta (Instagram/Facebook) e exibir conteúdos relevantes sobre geossintéticos, somente se você clicar em <em>Aceitar todos</em>.</li>' +
+          '</ul>' +
+          '<h4>3. Como gerenciar ou revogar</h4>' +
+          '<p>Você pode alterar sua preferência a qualquer momento clicando em <strong>Gerenciar Cookies</strong> no rodapé do site ou bloqueando cookies diretamente nas configurações do seu navegador (Chrome, Safari, Firefox, Edge).</p>'
+      },
+      termos: {
+        title: 'Termos de Uso',
+        html:
+          '<p><strong>Última atualização:</strong> Novembro de 2026</p>' +
+          '<p>Ao acessar o site da <strong>Prodesivo Indústria e Comércio Ltda</strong>, você concorda com as condições abaixo:</p>' +
+          '<ul>' +
+            '<li><strong>Caráter informativo e técnico:</strong> as especificações exibidas no catálogo digital servem como referência inicial. O dimensionamento definitivo de cada obra é confirmado por nossa equipe técnica mediante projeto e orçamento formal.</li>' +
+            '<li><strong>Propriedade intelectual:</strong> marca, logotipos, fotografias, textos técnicos e recursos visuais pertencem à Prodesivo ou a seus licenciadores, sendo vedada a reprodução comercial sem autorização.</li>' +
+            '<li><strong>Links externos:</strong> redirecionamentos para WhatsApp, cliente de e-mail, Google Maps ou redes sociais seguem as políticas de cada plataforma terceira.</li>' +
+          '</ul>'
+      }
+    };
+
+    var legalModal = document.getElementById('legalModal');
+    var legalTitle = document.getElementById('legalModalTitle');
+    var legalBody = document.getElementById('legalModalBody');
+    function openLegal(key) {
+      var doc = LEGAL_DOCS[key];
+      if (!doc || !legalModal) return;
+      legalTitle.textContent = doc.title;
+      legalBody.innerHTML = doc.html;
+      legalModal.showModal();
+    }
+    document.querySelectorAll('[data-legal]').forEach(function (el) {
+      el.addEventListener('click', function () {
+        openLegal(el.getAttribute('data-legal'));
+      });
+    });
+    if (legalModal) {
+      legalModal.querySelectorAll('[data-legal-close]').forEach(function (btn) {
+        btn.addEventListener('click', function () { legalModal.close(); });
+      });
+      legalModal.addEventListener('click', function (e) {
+        if (e.target === legalModal) legalModal.close();
+      });
+    }
+
+    var cookieBanner = document.getElementById('cookieBanner');
+    var cookieAccept = document.getElementById('cookieAccept');
+    var cookieEssential = document.getElementById('cookieEssential');
+    var cookieTogglePrefs = document.getElementById('cookieTogglePrefs');
+    var cookiePrefsPanel = document.getElementById('cookiePrefsPanel');
+    var prefAnalytics = document.getElementById('prefAnalytics');
+    var prefMarketing = document.getElementById('prefMarketing');
+    var openCookiePrefs = document.getElementById('openCookiePrefs');
+    var CONSENT_KEY = 'prodesivo_cookie_consent';
+    function saveConsent(val) {
+      try { localStorage.setItem(CONSENT_KEY, typeof val === 'string' ? val : JSON.stringify(val)); } catch (_) {}
+      if (cookieBanner) cookieBanner.hidden = true;
+    }
+    if (cookieBanner) {
+      var saved = null;
+      try { saved = localStorage.getItem(CONSENT_KEY); } catch (_) {}
+      if (!saved) cookieBanner.hidden = false;
+    }
+    if (cookieTogglePrefs && cookiePrefsPanel) {
+      cookieTogglePrefs.addEventListener('click', function () {
+        var open = cookiePrefsPanel.hidden;
+        cookiePrefsPanel.hidden = !open;
+        cookieAccept.textContent = open ? 'Salvar preferências' : 'Aceitar cookies';
+      });
+    }
+    if (cookieAccept) {
+      cookieAccept.addEventListener('click', function () {
+        if (cookiePrefsPanel && !cookiePrefsPanel.hidden) {
+          saveConsent({ essential: true, analytics: !!(prefAnalytics && prefAnalytics.checked), marketing: !!(prefMarketing && prefMarketing.checked) });
+        } else {
+          saveConsent({ essential: true, analytics: true, marketing: true });
+        }
+      });
+    }
+    if (cookieEssential) {
+      cookieEssential.addEventListener('click', function () {
+        saveConsent({ essential: true, analytics: false, marketing: false });
+      });
+    }
+    if (openCookiePrefs && cookieBanner) {
+      openCookiePrefs.addEventListener('click', function () {
+        cookieBanner.hidden = false;
+        if (cookiePrefsPanel) {
+          cookiePrefsPanel.hidden = false;
+          cookieAccept.textContent = 'Salvar preferências';
+        }
       });
     }
   });
