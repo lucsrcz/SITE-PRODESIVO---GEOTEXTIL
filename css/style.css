@@ -5625,13 +5625,54 @@ dialog.pg-modal.legal-modal {
 }
 
 @media (max-width: 640px) {
+  .site-footer .logo-svg {
+    height: 38px;
+  }
+
   .footer-social {
     flex-wrap: nowrap;
     gap: 6px;
+    margin-top: 10px;
   }
 
   .footer-social a {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
+  }
+
+  .footer-social svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .fmap {
+    width: 112px;
+    max-width: 112px;
+    padding-top: 68px;
+    justify-self: end;
+  }
+
+  .fmap-card {
+    width: 112px;
+    height: 68px;
+    border-radius: 10px;
+  }
+
+  .fmap-content {
+    padding: 8px;
+  }
+
+  .fmap-live {
+    display: none;
+  }
+
+  .fmap-bottom h3 {
+    font-size: 11px;
+    line-height: 1.2;
+  }
+
+  .footer-col-contato li:nth-child(2) {
+    display: none;
   }
 }
